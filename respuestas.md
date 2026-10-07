@@ -15,6 +15,11 @@ Responde con tus palabras, en 1-3 líneas. En la defensa te preguntaré lo mismo
 **1. (A1)** ¿Quién es el `issuer` de tu `ca.crt`? ¿Hasta qué fecha es válido? ¿Por qué el `subject`
 y el `issuer` de la CA son iguales y los de `ldap.crt` no?
 
+* **Issuer de ca.crt:** `C = ES, O = SecureCorp, CN = SecureCorp Root CA - smarin`
+* **Fecha de validez:** Es válido hasta el **4 de octubre de 2036** a las 18:48:35 GMT (notAfter).
+* **Explicación de diferencias:** 
+  El certificado `ca.crt` pertenece a una **Autoridad de Certificación Raíz (Root CA)**. Al situarse en la cima de la infraestructura de confianza, no tiene ninguna entidad jerárquica por encima que la valide, por lo que se **autofirma**. Esto provoca que el creador (`issuer`) y el dueño (`subject`) coincidan exactamente.
+  En cambio, `ldap.crt` es un **certificado final de servicio**. Su propietario (`subject`) es el servidor LDAP, pero ha sido emitido y firmado digitalmente (`issuer`) por la entidad de confianza superior, que en este caso es tu propia `SecureCorp Root CA`.
 
 **2. (A3)** Pega el comando y el resultado de tus dos búsquedas:
 
